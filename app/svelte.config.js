@@ -13,15 +13,36 @@ const config = {
 			trustedOrigins: ['http://localhost:5173']
 		},
 		csp: {
-      directives: {
-        'script-src': ['self']
-      },
-			mode: 'auto',			
-      reportOnly: {
-        'script-src': ['self'],
-        'report-uri': ['/']
-      }
-    }
+			directives: {
+				'default-src': ['self'],
+				'script-src': ['self'],
+				'style-src': ['self', 'unsafe-inline'],
+				'img-src': ['self', 'data:', 'https:'],
+				'font-src': ['self', 'data:'],
+				'connect-src': ['self'],
+				'frame-ancestors': ['none'],
+				'base-uri': ['self'],
+				'form-action': ['self'],
+				'object-src': ['none'],
+				'script-src-attr': ['none'],
+				'upgrade-insecure-requests': true
+			},
+			mode: 'auto',
+			reportOnly: {
+				'default-src': ['self'],
+				'script-src': ['self'],
+				'style-src': ['self', 'unsafe-inline'],
+				'img-src': ['self', 'data:', 'https:'],
+				'font-src': ['self', 'data:'],
+				'connect-src': ['self'],
+				'frame-ancestors': ['none'],
+				'base-uri': ['self'],
+				'form-action': ['self'],
+				'object-src': ['none'],
+				'script-src-attr': ['none'],
+				'report-uri': ['/csp-report']
+			}
+		}
 	},
 	extensions: ['.svelte', '.svx']
 };
