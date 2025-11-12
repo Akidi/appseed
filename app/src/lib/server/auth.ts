@@ -8,13 +8,13 @@ import { NODE_ENV } from '$env/static/private';
 
 const DAY_IN_MS = 1000 * 60 * 60 * 24;
 
-type SameSiteType = boolean | "lax" | "none" | "strict" | undefined;
+type SameSiteType = boolean | 'lax' | 'none' | 'strict' | undefined;
 
 const cookie = {
-	path: "/",
+	path: '/',
 	httpOnly: true,
-	secure: NODE_ENV === "production",
-	sameSite: "lax" as SameSiteType
+	secure: NODE_ENV === 'production',
+	sameSite: 'lax' as SameSiteType
 };
 
 export const sessionCookieName = 'auth-session';

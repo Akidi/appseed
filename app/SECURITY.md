@@ -100,12 +100,12 @@ export const actions: Actions = {
 
 ### Rate Limit Configurations
 
-| Config | Max Requests | Window | Use Case |
-|--------|-------------|--------|----------|
-| `rateLimits.auth` | 5 | 15 minutes | Login, password reset |
-| `rateLimits.api` | 100 | 1 minute | API endpoints |
-| `rateLimits.form` | 10 | 1 minute | Form submissions |
-| `rateLimits.general` | 200 | 1 minute | General requests |
+| Config               | Max Requests | Window     | Use Case              |
+| -------------------- | ------------ | ---------- | --------------------- |
+| `rateLimits.auth`    | 5            | 15 minutes | Login, password reset |
+| `rateLimits.api`     | 100          | 1 minute   | API endpoints         |
+| `rateLimits.form`    | 10           | 1 minute   | Form submissions      |
+| `rateLimits.general` | 200          | 1 minute   | General requests      |
 
 ### Custom Rate Limits
 
@@ -145,23 +145,25 @@ The current implementation uses in-memory storage. For production with multiple 
 
 The following security headers are automatically applied to all responses:
 
-| Header | Value | Purpose |
-|--------|-------|---------|
-| `X-Frame-Options` | `DENY` | Prevents clickjacking attacks |
-| `X-Content-Type-Options` | `nosniff` | Prevents MIME sniffing |
-| `Referrer-Policy` | `strict-origin-when-cross-origin` | Controls referrer information |
-| `X-XSS-Protection` | `1; mode=block` | Legacy XSS protection |
-| `Permissions-Policy` | Restrictive | Limits browser feature access |
-| `Strict-Transport-Security` | Production only | Enforces HTTPS (HSTS) |
+| Header                      | Value                             | Purpose                       |
+| --------------------------- | --------------------------------- | ----------------------------- |
+| `X-Frame-Options`           | `DENY`                            | Prevents clickjacking attacks |
+| `X-Content-Type-Options`    | `nosniff`                         | Prevents MIME sniffing        |
+| `Referrer-Policy`           | `strict-origin-when-cross-origin` | Controls referrer information |
+| `X-XSS-Protection`          | `1; mode=block`                   | Legacy XSS protection         |
+| `Permissions-Policy`        | Restrictive                       | Limits browser feature access |
+| `Strict-Transport-Security` | Production only                   | Enforces HTTPS (HSTS)         |
 
 ### HSTS (HTTP Strict Transport Security)
 
 HSTS is enabled in production mode only:
+
 - `max-age=31536000` (1 year)
 - `includeSubDomains` - Applies to all subdomains
 - `preload` - Ready for HSTS preload list
 
 **Before submitting to HSTS preload list:**
+
 1. Test thoroughly in production
 2. Ensure HTTPS works on all subdomains
 3. Submit at: https://hstspreload.org/
@@ -169,6 +171,7 @@ HSTS is enabled in production mode only:
 ### Permissions Policy
 
 Restricts access to sensitive browser features:
+
 - Camera: Disabled
 - Microphone: Disabled
 - Geolocation: Disabled
@@ -206,6 +209,7 @@ Violations are reported to `/csp-report` endpoint and logged for monitoring.
 #### Viewing CSP Reports
 
 Check server logs for CSP violations:
+
 ```
 CSP Violation Report: {
   "document-uri": "...",
@@ -219,6 +223,7 @@ CSP Violation Report: {
 If you need to add external services (analytics, CDNs, etc.):
 
 1. **Update `svelte.config.js`**:
+
 ```javascript
 csp: {
   directives: {
@@ -279,18 +284,15 @@ CSRF protection is enabled in `svelte.config.js`:
 
 ```javascript
 csrf: {
-  trustedOrigins: ['http://localhost:5173'] // Add production URLs
+	trustedOrigins: ['http://localhost:5173']; // Add production URLs
 }
 ```
 
 **For production**, update with your actual domains:
+
 ```javascript
 csrf: {
-  trustedOrigins: [
-    'http://localhost:5173',
-    'https://yourdomain.com',
-    'https://www.yourdomain.com'
-  ]
+	trustedOrigins: ['http://localhost:5173', 'https://yourdomain.com', 'https://www.yourdomain.com'];
 }
 ```
 

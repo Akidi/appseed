@@ -1,11 +1,11 @@
 <script lang="ts">
-  function setTheme(theme: string) {
-    if (theme === 'auto') {
-      document.documentElement.removeAttribute('data-theme');
-    } else {
-      document.documentElement.setAttribute('data-theme', theme);
-    }
-  }
+	function setTheme(theme: string) {
+		if (theme === 'auto') {
+			document.documentElement.removeAttribute('data-theme');
+		} else {
+			document.documentElement.setAttribute('data-theme', theme);
+		}
+	}
 </script>
 
 <a href="#main-content" class="skip-link">Skip to main content</a>

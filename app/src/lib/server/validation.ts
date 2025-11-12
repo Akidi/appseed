@@ -6,7 +6,7 @@ import { fail } from '@sveltejs/kit';
  */
 export const schemas = {
 	// Email validation
-	email: z.string().email('Invalid email address').min(1, 'Email is required'),
+	email: z.email('Invalid email address').min(1, 'Email is required'),
 
 	// Password validation - enforce strong passwords
 	password: z
@@ -24,7 +24,7 @@ export const schemas = {
 		.regex(/^[a-zA-Z0-9_]+$/, 'Username can only contain letters, numbers, and underscores'),
 
 	// ID validation
-	id: z.string().uuid('Invalid ID format')
+	id: z.uuid('Invalid ID format')
 };
 
 /**
@@ -38,15 +38,17 @@ export const loginSchema = z.object({
 /**
  * Registration form validation schema
  */
-export const registerSchema = z.object({
-	username: schemas.username,
-	email: schemas.email,
-	password: schemas.password,
-	confirmPassword: z.string()
-}).refine((data) => data.password === data.confirmPassword, {
-	message: 'Passwords do not match',
-	path: ['confirmPassword']
-});
+export const registerSchema = z
+	.object({
+		username: schemas.username,
+		email: schemas.email,
+		password: schemas.password,
+		confirmPassword: z.string()
+	})
+	.refine((data) => data.password === data.confirmPassword, {
+		message: 'Passwords do not match',
+		path: ['confirmPassword']
+	});
 
 /**
  * Validate form data against a schema
@@ -74,11 +76,7 @@ export function validateFormData<T extends z.ZodTypeAny>(
 /**
  * Validate request data and return SvelteKit fail response if invalid
  */
-export function validateOrFail<T extends z.ZodTypeAny>(
-	schema: T,
-	data: unknown,
-	status = 400
-) {
+export function validateOrFail<T extends z.ZodTypeAny>(schema: T, data: unknown, status = 400) {
 	const result = schema.safeParse(data);
 
 	if (!result.success) {
@@ -99,10 +97,10 @@ export function validateOrFail<T extends z.ZodTypeAny>(
 export function sanitizeString(input: string): string {
 	// Remove null bytes
 	let sanitized = input.replace(/\0/g, '');
-	
+
 	// Trim whitespace
 	sanitized = sanitized.trim();
-	
+
 	return sanitized;
 }
 

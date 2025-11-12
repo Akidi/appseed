@@ -102,7 +102,7 @@ function getClientIdentifier(event: RequestEvent): string {
 
 	// Use the first IP from x-forwarded-for if available
 	if (forwardedFor) {
-		const ips = forwardedFor.split(',').map(ip => ip.trim());
+		const ips = forwardedFor.split(',').map((ip) => ip.trim());
 		return ips[0];
 	}
 
@@ -156,7 +156,10 @@ export function rateLimit(event: RequestEvent, config: RateLimitConfig): void {
 	const result = rateLimitStore.check(key, config);
 
 	// Add rate limit headers
-	const remaining = Math.max(0, config.maxRequests - (rateLimitStore['store'].get(key)?.count || 0));
+	const remaining = Math.max(
+		0,
+		config.maxRequests - (rateLimitStore['store'].get(key)?.count || 0)
+	);
 	const resetTime = new Date(result.resetTime).toISOString();
 
 	// Set rate limit headers (these will be overridden by response headers in hooks)
