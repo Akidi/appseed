@@ -5,11 +5,20 @@ declare global {
 		interface Locals {
 			user: import('$lib/server/auth').SessionValidationResult['user'];
 			session: import('$lib/server/auth').SessionValidationResult['session'];
+			rateLimitHeaders?: {
+				'X-RateLimit-Limit': string;
+				'X-RateLimit-Remaining': string;
+				'X-RateLimit-Reset': string;
+			};
 		}
-	} // interface Error {}
-	// interface Locals {}
-} // interface PageData {}
-// interface PageState {}
+		interface Error {
+			message: string;
+			retryAfter?: number;
+		}
+		// interface PageData {}
+		// interface PageState {}
+		// interface Platform {}
+	}
+}
 
-// interface Platform {}
 export {};
