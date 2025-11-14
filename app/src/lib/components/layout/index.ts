@@ -1,16 +1,19 @@
-export { default as AspectRatio } from './AspectRatio.svelte';
-export { default as CardGrid } from './CardGrid.svelte';
-export { default as Center } from './Center.svelte';
-export { default as Cluster } from './Cluster.svelte';
-export { default as Container } from './Container.svelte';
-export { default as Divider } from './Divider.svelte';
-export { default as Flex } from './Flex.svelte';
-export { default as FormGrid } from './FormGrid.svelte';
-export { default as Grid } from './Grid.svelte';
-export { default as ScrollArea } from './ScrollArea.svelte';
-export { default as Show } from './Show.svelte';
-export { default as Sidebar } from './Sidebar.svelte';
-export { default as Spacer } from './Spacer.svelte';
-export { default as Split } from './Split.svelte';
-export { default as Stack } from './Stack.svelte';
-export { default as Sticky } from './Sticky.svelte';
+// Layout Components
+// Re-export all layout components for convenient imports
+
+export { default as AspectRatio } from './AspectRatio';
+export { default as CardGrid } from './CardGrid';
+export { default as Center } from './Center';
+export { default as Cluster } from './Cluster';
+export { default as Container } from './Container';
+export { default as Divider } from './Divider';
+export { default as Flex } from './Flex';
+export { default as FormGrid } from './FormGrid';
+export { default as Grid } from './Grid';
+export { default as ScrollArea } from './ScrollArea';
+export { default as Show } from './Show';
+export { default as Sidebar } from './Sidebar';
+export { default as Spacer } from './Spacer';
+export { default as Split } from './Split';
+export { default as Stack } from './Stack';
+export { default as Sticky } from './Sticky';
