@@ -1,48 +1,59 @@
-<script lang="ts" context="module">
-	import type { Meta } from '@storybook/svelte';
+<script module lang="ts">
+	import { defineMeta } from '@storybook/addon-svelte-csf';
 	import DateInput from './DateInput.svelte';
 
-	export const meta: Meta<typeof DateInput> = {
-		title: 'UI/DateInput',
+	const { Story } = defineMeta({
 		component: DateInput,
-		tags: ['autodocs']
-	};
+		title: 'UI/DateInput',
+		tags: ['autodocs'],
+		args: {
+			name: 'date',
+			label: 'Select Date'
+		}
+	});
 </script>
 
 <script lang="ts">
-	import { Story } from '@storybook/addon-svelte-csf';
 	import { Stack } from '$lib/components/layout';
 </script>
 
-<Story name="Default">
-	<DateInput name="date" label="Select Date" />
-</Story>
+<Story name="Default" />
 
 <Story name="With Value">
-	<DateInput name="date" label="Birth Date" value="1990-01-01" />
+	{#snippet template()}
+		<DateInput name="date" label="Birth Date" value="1990-01-01" />
+	{/snippet}
 </Story>
 
 <Story name="Required">
-	<DateInput name="date" label="Required Date" required />
+	{#snippet template()}
+		<DateInput name="date" label="Required Date" required />
+	{/snippet}
 </Story>
 
 <Story name="Disabled">
-	<DateInput name="date" label="Disabled Date" disabled value="2024-01-01" />
+	{#snippet template()}
+		<DateInput name="date" label="Disabled Date" disabled value="2024-01-01" />
+	{/snippet}
 </Story>
 
 <Story name="With Min and Max">
-	<DateInput
-		name="date"
-		label="Select within range"
-		min="2024-01-01"
-		max="2024-12-31"
-		value="2024-06-15"
-	/>
+	{#snippet template()}
+		<DateInput
+			name="date"
+			label="Select within range"
+			min="2024-01-01"
+			max="2024-12-31"
+			value="2024-06-15"
+		/>
+	{/snippet}
 </Story>
 
 <Story name="Multiple Inputs">
-	<Stack gap="md">
-		<DateInput name="start" label="Start Date" />
-		<DateInput name="end" label="End Date" />
-	</Stack>
+	{#snippet template()}
+		<Stack gap="md">
+			<DateInput name="start" label="Start Date" />
+			<DateInput name="end" label="End Date" />
+		</Stack>
+	{/snippet}
 </Story>
